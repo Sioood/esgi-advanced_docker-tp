@@ -1,0 +1,33 @@
+services:
+  web:
+    container_name: advanced_docker-apache
+    build:
+      context: ./apache/
+    ports:
+      - '8080:80'
+    volumes:
+      - ./DATA:/var/www/html
+      - ./apache_conf/apache.conf:/etc/apache2/apache2.conf
+
+  php:
+    container_name: advanced_docker-php
+    build:
+      context: ./php/
+    volumes:
+      - ./DATA:/var/www/html
+    ports:
+      - '9000:9000'
+
+  node:
+    container_name: advanced_docker-back
+    build:
+      context: ./back/
+    ports:
+      - '8181:8181'
+
+  front:
+    container_name: advanced_docker-front
+    build:
+      context: ./front/
+    ports:
+      - '8383:80'

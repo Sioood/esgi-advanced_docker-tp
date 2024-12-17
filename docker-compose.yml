@@ -1,0 +1,22 @@
+services:
+  # No volume to store db data -> only for the exercise
+  # Need to recreate "docker_avance" database everytime
+  db:
+    container_name: advanced_docker-db
+    image: mariadb
+    restart: always 
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    container_name: advanced_docker-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: advanced_docker-db
+      PMA_PORT: 3306
+    ports:
+      - 8282:80
+    depends_on:
+      - db
